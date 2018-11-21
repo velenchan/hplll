@@ -31,6 +31,8 @@ int main(void) {
 
   lll_reduction(AT, 0.99, 0.501, LM_WRAPPER);
 
+  transpose(AT, AT);
+
   cout << endl << AT << endl; 
   
 
