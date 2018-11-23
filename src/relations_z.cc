@@ -291,6 +291,7 @@ FPTuple<ZT, FT, MatrixFT>::relation(ZZ_mat<mpz_t>& C,  long alpha,
   int found;
 
 
+
   // Shift should be maximized for efficiency, then the overall precision is at least truncate - shift  (truncate > shift)
   //
   // Hence enough precision should be ensured by truncate - shift
@@ -461,8 +462,6 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
       Bp.hlll(delta);
 
-      //swapnum += Bp.nbswaps;
-      //testnum += Bp.nblov;
 
 
 
@@ -652,8 +651,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 #endif
 
         if (lllmethod == HLLL) {
-            cout << endl << "The number of swaps is: " << Bp.nbswaps <<endl;
-            cout << endl << "The number of Lovasz tests is: " << Bp.nblov <<endl;
+            cout << endl << "The total number of swaps is: " << Bp.nbswaps <<endl;
         }
 
         return 1;
