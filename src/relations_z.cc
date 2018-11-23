@@ -291,12 +291,12 @@ FPTuple<ZT, FT, MatrixFT>::relation(ZZ_mat<mpz_t>& C,  long alpha,
   int found;
 
 
-  // Shift should be maximized for efficiency, then the overall precision is at least truncate - shift  (truncate > shift) 
-  // 
-  // Hence enough precision should be ensured by truncate - shift 
+  // Shift should be maximized for efficiency, then the overall precision is at least truncate - shift  (truncate > shift)
   //
-  // However, truncate cannot be too large : the ratio between column norms after the shift will 
-  //    give extra size  : truncate + extra  <= integer size  
+  // Hence enough precision should be ensured by truncate - shift
+  //
+  // However, truncate cannot be too large : the ratio between column norms after the shift will
+  //    give extra size  : truncate + extra  <= integer size
 
 
   found = relation_lll(C, L, alpha, confidence_gap, shift, truncate, lllmethod, sizemethod, delta);
@@ -328,6 +328,11 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
   Timer tlll;
   Timer tprod;
   Timer ttrunc;
+
+
+    //unsigned int swapnum = 0;
+    //unsigned int testnum = 0;
+
 
 #ifdef _OPENMP
   double en, st;
@@ -455,6 +460,11 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
       Bp.assign(T);
 
       Bp.hlll(delta);
+
+      //swapnum += Bp.nbswaps;
+      //testnum += Bp.nblov;
+
+
 
 #ifdef _OPENMP
       en = omp_get_wtime();
@@ -640,6 +650,11 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
         cout << endl << "Time lll: " << tlll << endl;
         cout << "Time products: " << tprod << endl << endl;
 #endif
+
+        if (lllmethod == HLLL) {
+            cout << endl << "The number of swaps is: " << Bp.nbswaps <<endl;
+            cout << endl << "The number of Lovasz tests is: " << Bp.nblov <<endl;
+        }
 
         return 1;
 
