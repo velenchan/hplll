@@ -2253,10 +2253,10 @@ void lift_truncate(ZZ_mat<long>& C_out, ZZ_mat<mpz_t> A, long def, long bits) {
 
     long bbc = mmax; // Bits before conversion
 
-    cout << "s = " << bits -mmin +2 << endl;
-    cout << "bits = " << bits << endl;
-    cout << "mmin = " << mmin << endl;
-    cout << "mmax = " << mmax << endl;
+    //cout << "s = " << bits -mmin +2 << endl;
+    //cout << "bits = " << bits << endl;
+    //cout << "mmin = " << mmin << endl;
+    //cout << "mmax = " << mmax << endl;
 
     if ((mmin - 2) > bits) {
 

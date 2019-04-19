@@ -341,7 +341,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
                                         long confidence_gap, long shift, int truncate, int lllmethod,  int sizemethod, double delta) {
 
 
-    cout << "\n begin relation_lll().\n"<<endl;
+    //cout << "\n begin relation_lll().\n"<<endl;
 
   Timer time;
 
@@ -405,8 +405,8 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
   // relié, plus petit,  au shift sur S (ex 80)
   confidence.mul_2si(confidence, -confidence_gap - shift); // La baisse absolue est plus petite que le shift
 
-  cout << "confidence = " << confidence << endl;
-  cout << "confidence.exponent = " << confidence.exponent() << endl;
+  //cout << "confidence = " << confidence << endl;
+  //cout << "confidence.exponent = " << confidence.exponent() << endl;
 
   FP_NR<mpfr_t> epsilon;
   epsilon = 10.0;
@@ -435,7 +435,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
     int n_swaps = 0;
     int nb_swaps = 0;
 
-    cout << " position 1. \n" << endl;
+    //cout << " position 1. \n" << endl;
 
 
 
@@ -463,14 +463,14 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
 
 
-    HPLLL_INFO("Current default: ", def);
+    //HPLLL_INFO("Current default: ", def);
 
     if ((target_def - def) <= shift)
       def = target_def;
     else def += shift;
 
 
-    HPLLL_INFO("now default: ", def);
+    //HPLLL_INFO("now default: ", def);
 #ifdef _OPENMP
     st = omp_get_wtime();
 #else
@@ -542,8 +542,8 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 #endif
 
 
-      cout << "sizeof U: " << maxbitsize(Bp.getU(), 0, d, d) << endl;
-      cout << "sizeof basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
+      //cout << "sizeof U: " << maxbitsize(Bp.getU(), 0, d, d) << endl;
+      //cout << "sizeof basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
 
 
 
@@ -613,9 +613,9 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
 
 
-      cout << "sizeof U: " << maxbitsize(Bp.getU(), 0, d, d) << endl;
-      cout << "sizeof A_in: " << maxbitsize(A_in, 0, d + 1, d) << endl << endl;
-      cout << "sizeof the unimodular basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
+      //cout << "sizeof U: " << maxbitsize(Bp.getU(), 0, d, d) << endl;
+      //cout << "sizeof A_in: " << maxbitsize(A_in, 0, d + 1, d) << endl << endl;
+      //cout << "sizeof the unimodular basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
 
 
     } // end FPLLL
@@ -638,7 +638,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
  * For tracing rs_12_13, with 20, 20, 40 parameter.
  *
  * ZZ_mat<mpz_t> tmp;//16889777313727009140128160;
-	
+
 	tmp.resize(1,3);
 	tmp(0, 0) = 1;
 	tmp(0, 1) = 104099653179802559;
@@ -662,7 +662,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
 
     quot = new_quot;
-    cout << " quot = " << quot << endl;
+    //cout << " quot = " << quot << endl;
 
     foundcol = 0;
 
@@ -686,14 +686,14 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
     new_quot.set_z(tz);
 
-    cout << "new_quot = tz = " << new_quot << endl;
+    //cout << "new_quot = tz = " << new_quot << endl;
 
 
-    maxcol.abs(A_in(0, foundcol)); 
+    maxcol.abs(A_in(0, foundcol));
     maxcol.mul_2si(maxcol, def);
 
 
-    cout << " initial maxcol = " << maxcol << endl;
+    //cout << " initial maxcol = " << maxcol << endl;
 
     for (i = 0; i < d; i++) {
       tz.abs(A_in(m + i, foundcol));
@@ -702,16 +702,16 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
     tf.set_z(maxcol);
 
-    cout << "tf = maxcol = " << tf << endl;
+    //cout << "tf = maxcol = " << tf << endl;
 
     new_quot.div(new_quot, tf);
 
-    cout << "new_quot = tz/tf = " << new_quot << endl;
+    //cout << "new_quot = tz/tf = " << new_quot << endl;
 
     gap.div(new_quot, quot);
     gap.abs(gap);
 
-    cout << "gap = |new_quot/quot| = " << gap;
+    //cout << "gap = |new_quot/quot| = " << gap;
 
 
     /* GV Mer 20 sep 2017 12:57:27 CEST
@@ -719,7 +719,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
         without having shifted for discovering all non zero entries
     */
 
-    cout << " expondent of gap = " << gap.exponent() << endl;
+    //cout << " expondent of gap = " << gap.exponent() << endl;
 
 
     if (def > inputgap - bitsize) {
