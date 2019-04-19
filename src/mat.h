@@ -2280,7 +2280,7 @@ void lift_truncate(ZZ_mat<long>& C_out, ZZ_mat<mpz_t> A, long def, long bits) {
         }
       }
 
-      cout << "Remains down " << maxloc << endl;
+      //cout << "Remains down " << maxloc << endl;
 //}// end added by J. Chen
       if (bbc > 63) {
 
