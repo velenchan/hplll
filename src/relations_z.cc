@@ -44,28 +44,34 @@ namespace hplll {
 
 
 template<> int
-FPTuple<long, double, matrix<FP_NR<double> > >::call_fplll(ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
+FPTuple<long, double, matrix<FP_NR<double> > >::call_fplll(int &n_swaps, ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
+  ZZ_mat<long> u_invZ;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_DOUBLE, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_DOUBLE, precision, 0);
+
+
+  cout << "status 1 = "<< status << endl;
 
   return status;
 }
 
 
 template<> int
-FPTuple<long, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
+FPTuple<long, long double, matrix<FP_NR<long double> > >::call_fplll(int &n_swaps, ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_LONG_DOUBLE, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_LONG_DOUBLE, precision, 0);
+
+    cout << "status 2 = "<< status << endl;
 
   return status;
 
@@ -74,14 +80,16 @@ FPTuple<long, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_mat<long
 
 
 template<> int
-FPTuple<long, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
+FPTuple<long, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(int &n_swaps, ZZ_mat<long> &b, ZZ_mat<long> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_DD, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_DD, precision, 0);
+
+  cout << "status 3 = "<< status << endl;
 
   return status;
 
@@ -89,7 +97,7 @@ FPTuple<long, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(ZZ_mat<long> &b, ZZ
 }
 
 template<> int
-FPTuple<__int128_t, double, matrix<FP_NR<double> > >::call_fplll(ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
+FPTuple<__int128_t, double, matrix<FP_NR<double> > >::call_fplll(int &n_swaps, ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
@@ -101,7 +109,7 @@ FPTuple<__int128_t, double, matrix<FP_NR<double> > >::call_fplll(ZZ_mat<__int128
 }
 
 template<> int
-FPTuple<__int128_t, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
+FPTuple<__int128_t, long double, matrix<FP_NR<long double> > >::call_fplll(int &n_swaps, ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
@@ -113,7 +121,7 @@ FPTuple<__int128_t, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_ma
 }
 
 template<> int
-FPTuple<__int128_t, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
+FPTuple<__int128_t, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(int &n_swaps, ZZ_mat<__int128_t> &b, ZZ_mat<__int128_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
@@ -125,28 +133,32 @@ FPTuple<__int128_t, dd_real, matrix<FP_NR<dd_real> > >::call_fplll(ZZ_mat<__int1
 }
 
 template<> int
-FPTuple<mpz_t, double, matrix<FP_NR<double> > >::call_fplll(ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
+FPTuple<mpz_t, double, matrix<FP_NR<double> > >::call_fplll(int &n_swaps, ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_DOUBLE, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_DOUBLE, precision, 0);
+
+  cout << "status 4= "<< status << endl;
 
   return status;
 
 }
 
 template<> int
-FPTuple<mpz_t, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
+FPTuple<mpz_t, long double, matrix<FP_NR<long double> > >::call_fplll(int &n_swaps, ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_LONG_DOUBLE, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_LONG_DOUBLE, precision, 0);
+
+  cout << "status 5 = "<< status << endl;
 
   return status;
 
@@ -155,14 +167,16 @@ FPTuple<mpz_t, long double, matrix<FP_NR<long double> > >::call_fplll(ZZ_mat<mpz
 
 
 template<> int
-FPTuple<mpz_t, dpe_t, MatrixPE<double, dpe_t> >::call_fplll(ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
+FPTuple<mpz_t, dpe_t, MatrixPE<double, dpe_t> >::call_fplll(int &n_swaps, ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
 
-  status = lll_reduction(b, u, delta, eta, method, FT_DOUBLE, precision);
+  status = lll_reduction(n_swaps, b, u, delta, eta, method, FT_DOUBLE, precision, 0);
+
+  cout << "status 6 = "<< status << endl;
 
   return status;
 
@@ -170,13 +184,15 @@ FPTuple<mpz_t, dpe_t, MatrixPE<double, dpe_t> >::call_fplll(ZZ_mat<mpz_t> &b, ZZ
 
 
 template<> int
-FPTuple<mpz_t, ldpe_t, MatrixPE<long double, ldpe_t> >::call_fplll(ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
+FPTuple<mpz_t, ldpe_t, MatrixPE<long double, ldpe_t> >::call_fplll(int &n_swaps, ZZ_mat<mpz_t> &b, ZZ_mat<mpz_t> &u, double delta, double eta,  \
     LLLMethod method, FloatType floatType,               \
     int precision, int flags) {
 
   int status;
 
-  status = lll_reduction(b, u, delta, eta, method, FT_LONG_DOUBLE, precision);
+  status = lll_reduction(n_swaps,b, u, delta, eta, method, FT_LONG_DOUBLE, precision, 0);
+
+  cout << "status 7 = "<< status << endl;
 
   return status;
 
@@ -324,6 +340,9 @@ template<class ZT, class FT, class MatrixFT>  int
 FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long alpha,
                                         long confidence_gap, long shift, int truncate, int lllmethod,  int sizemethod, double delta) {
 
+
+    cout << "\n begin relation_lll().\n"<<endl;
+
   Timer time;
 
   Timer tlll;
@@ -386,6 +405,9 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
   // relié, plus petit,  au shift sur S (ex 80)
   confidence.mul_2si(confidence, -confidence_gap - shift); // La baisse absolue est plus petite que le shift
 
+  cout << "confidence = " << confidence << endl;
+  cout << "confidence.exponent = " << confidence.exponent() << endl;
+
   FP_NR<mpfr_t> epsilon;
   epsilon = 10.0;
 
@@ -406,8 +428,32 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
   UT.resize(d, d);
 
 
+
+
   Lattice<ZT, FT, matrix<Z_NR<ZT> >,  MatrixFT > Bp(T, TRANSFORM, sizemethod);
 
+    int n_swaps = 0;
+    int nb_swaps = 0;
+
+    cout << " position 1. \n" << endl;
+
+
+
+/*
+    ZZ_mat<ZT> VT;
+    VT.resize(d, d);
+    int gso_flags = 2; // This option means LM_FAST is used.
+    int flags = 0;
+
+    cout << " position 2. \n" << endl;
+
+
+
+    MatGSO<Z_NR<ZT>, FP_NR<FT>> m_gso(T, UT, VT, gso_flags);
+    LLLReduction<Z_NR<ZT>, FP_NR<FT>> lll_obj(m_gso, LLL_DEF_DELTA, LLL_DEF_ETA, flags);
+
+    cout << " position 3. \n" << endl;
+*/
 
 
   // Main loop on the shifts
@@ -424,6 +470,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
     else def += shift;
 
 
+    HPLLL_INFO("now default: ", def);
 #ifdef _OPENMP
     st = omp_get_wtime();
 #else
@@ -506,7 +553,7 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
     // FPLLL
 
     else if (lllmethod == FPLLL) {
-
+    cout << " FPLLL starts \n" << endl;
 
 
 #ifdef _OPENMP
@@ -519,7 +566,13 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
       setId(UT);
 
-      call_fplll(TT, UT, delta, 0.51, LM_FAST, FT_DOUBLE, 0);
+      /* The following is only for rs_5_5 to rs_10_10. The main goal
+        is to count the number of LLL-swaps after using lift-truncate.
+       */
+        call_fplll(nb_swaps, TT, UT, delta, 0.51, LM_FAST, FT_DOUBLE, 0);
+        //lll_reduction(nb_swaps, TT, UT, delta, 0.51, LM_FAST, FT_DOUBLE, 0, 0);
+        n_swaps += nb_swaps;
+
 
 
 #ifdef _OPENMP
@@ -549,6 +602,9 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
       time.start();
 
       transpose(U, UT);
+
+
+
       matprod_in_int(A_in, U);
 
       time.stop();
@@ -558,12 +614,15 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
 
       cout << "sizeof U: " << maxbitsize(Bp.getU(), 0, d, d) << endl;
-      cout << "sizeof basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
+      cout << "sizeof A_in: " << maxbitsize(A_in, 0, d + 1, d) << endl << endl;
+      cout << "sizeof the unimodular basis: " << maxbitsize(A_in, 1, d + 1, d) << endl << endl;
 
 
     } // end FPLLL
 
-
+    if (lllmethod == HLLL) {
+        n_swaps =  Bp.nbswaps;
+    }
 
     // Test
     // ----
@@ -574,7 +633,36 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
          for the detection (bad truncation and crash)
     */
 
+
+/*
+ * For tracing rs_12_13, with 20, 20, 40 parameter.
+ *
+ * ZZ_mat<mpz_t> tmp;//16889777313727009140128160;
+	
+	tmp.resize(1,3);
+	tmp(0, 0) = 1;
+	tmp(0, 1) = 104099653179802559;
+	tmp(0, 2) = 162246240;
+	tmp(0, 0).mul(tmp(0, 1), tmp(0, 2));
+
+	cout << "the product is " << tmp(0, 0) << endl;
+
+	Z_NR<mpz_t> ttt;
+
+    for (int i = m; i < d+m; i++){
+    	for (int kk = 0; kk < d; kk++){
+		ttt.abs(A_in(i, kk));
+		if (tmp(0,0).cmp(ttt) == 0){
+			cout << "YES, FOUND HERE!" << endl;
+		}
+	}
+    }
+    cout << "NOT FOUND YET. " << endl;
+*/
+
+
     quot = new_quot;
+    cout << " quot = " << quot << endl;
 
     foundcol = 0;
 
@@ -594,14 +682,18 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
         foundcol = i;
       }
 
-    }
+    }// now, tz = min |A_in(0, i)| = |A_in(0, foundcol)|.
 
     new_quot.set_z(tz);
 
+    cout << "new_quot = tz = " << new_quot << endl;
 
-    maxcol.abs(A_in(0, foundcol));
+
+    maxcol.abs(A_in(0, foundcol)); 
     maxcol.mul_2si(maxcol, def);
 
+
+    cout << " initial maxcol = " << maxcol << endl;
 
     for (i = 0; i < d; i++) {
       tz.abs(A_in(m + i, foundcol));
@@ -609,17 +701,26 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
     }
 
     tf.set_z(maxcol);
+
+    cout << "tf = maxcol = " << tf << endl;
+
     new_quot.div(new_quot, tf);
 
+    cout << "new_quot = tz/tf = " << new_quot << endl;
 
     gap.div(new_quot, quot);
     gap.abs(gap);
+
+    cout << "gap = |new_quot/quot| = " << gap;
 
 
     /* GV Mer 20 sep 2017 12:57:27 CEST
         added the test using the input gap otherwise the computation may terminate
         without having shifted for discovering all non zero entries
     */
+
+    cout << " expondent of gap = " << gap.exponent() << endl;
+
 
     if (def > inputgap - bitsize) {
 
@@ -650,9 +751,9 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
         cout << "Time products: " << tprod << endl << endl;
 #endif
 
-        if (lllmethod == HLLL) {
-            cout << endl << "The total number of swaps is: " << Bp.nbswaps <<endl;
-        }
+
+
+        cout << endl << "The total number of swaps is: " << n_swaps <<endl;
 
         return 1;
 
@@ -707,11 +808,15 @@ FPTuple<ZT, FT, MatrixFT>::relation_lll(ZZ_mat<mpz_t>& C, ZZ_mat<mpz_t> A, long 
 
     Direct LLL reduction
 
+    Note from J. Chen: ZT would be better with Z_NR<mpz_t>, or else the input data will be wrong,
+          due to the large scale parameter (2^alpha) of the integer relation lattice.
+
 **************************************************************************************/
 
-template<class ZT, class FT, class MatrixFT>  int
-FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
-                               int lllmethod,  int sizemethod, double delta) {
+
+template<class ZT, class FT, class MatrixFT>
+int FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
+                                    int lllmethod,  int sizemethod, double delta) {
 
 
 
@@ -729,6 +834,10 @@ FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
     L(0, j).set_f(t);
   }
 
+    ZZ_mat<ZT> U;
+    U.resize(d, d);
+
+
 
   int found = 0;
 
@@ -739,8 +848,11 @@ FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
   for (j = 0; j < d; j++)
     A(0, j) = L(0, j);
 
-  for (i = 0; i < d; i++)
+  for (i = 0; i < d; i++){
     A(m + i, i) = 1;
+  }
+
+    //cout<< " before LLL reduction, the input basis is " << endl << A <<endl;
 
 
   if (lllmethod == HLLL) {
@@ -749,38 +861,63 @@ FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
 
     Lattice<ZT, FT, matrix<Z_NR<ZT> >,  MatrixFT > B(A);
 
+    cout << " begin direct HLLL" << endl;
+
     B.hlll(delta);
 
+    cout << endl << "The total number of swaps is: " << B.nbswaps <<endl;
 
     A = B.getbase();
 
+
+
+
+
+    /*
+        Added by J. Chen on Nov. 29, 2018
+
+        If we use the following specification:
+            FPTuple<mpz_t, double, matrix<FP_NR<double> > > L(fpv);
+            L.lll(C, alpha, HLLL, DEF_REDUCTION, 0.99);
+        then when alpha > 511, say alpha = 512,
+            ./relation < ../data/rs_5_5
+        will run with #swaps up to 4294967295, which is
+            nblov_max,
+        set in the constructor of the class Lattice in hlll.cc.
+
+
+
+    */
   }
 
 
   else if (lllmethod == FPLLL) {
 
     ZZ_mat<ZT> T;
+    int n_swaps;
     T.resize(d, d + m);
 
     transpose(T, A);
 
+    cout << " begin direct FPLLL" << endl;
+
     // Put the wrapper also if large examples
-    lll_reduction(T, delta, 0.51, LM_FAST, FT_DEFAULT, 0);
+    lll_reduction(n_swaps, T, delta, 0.51, LM_FAST, FT_DEFAULT, 0, 0);
 
     transpose(A, T);
+
+    cout << "the number of swaps is " << n_swaps << endl <<  endl;
+
 
   } // end FPLLL
 
 
   int foundcol = 0;
 
-  ZZ_mat<ZT> U;
+    for (i = 0; i < d; i++)
+        for (j = 0; j < d; j++)
+            U(i, j) = A(i + 1, j);
 
-  U.resize(d, d);
-
-  for (i = 0; i < d; i++)
-    for (j = 0; j < d; j++)
-      U(i, j) = A(i + 1, j);
 
 
   matprod_in(L, U);
@@ -800,6 +937,8 @@ FPTuple<ZT, FT, MatrixFT>::lll(ZZ_mat<mpz_t>& C,  long alpha,
     }
 
   }
+
+
 
 
   C.resize(d, 1);

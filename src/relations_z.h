@@ -30,6 +30,7 @@ http://www.gnu.org/licenses/ or write to the Free Software Foundation, Inc.,
 
 
 #include  "hlll.h"
+#include <fplll.h>
 
 
 
@@ -52,7 +53,7 @@ protected:
 
 
 
-  int call_fplll(ZZ_mat<ZT> &b, ZZ_mat<ZT> &u, double delta = LLL_DEF_DELTA, double eta = LLL_DEF_ETA,          \
+  int call_fplll(int &n_swaps, ZZ_mat<ZT> &b, ZZ_mat<ZT> &u, double delta = LLL_DEF_DELTA, double eta = LLL_DEF_ETA,          \
                  LLLMethod method = LM_WRAPPER, FloatType floatType = FT_DEFAULT,               \
                  int precision = 0, int flags = LLL_DEFAULT);
 
@@ -78,7 +79,7 @@ public:
                int sizemethod = DEF_REDUCTION, double delta = 0.99);
 
 
-  int lll(ZZ_mat<mpz_t>& C, long alpha, int lllmethod = FPLLL, \
+  int lll(ZZ_mat<mpz_t>& C, long alpha, int lllmethod = FPLLL,
           int sizemethod = DEF_REDUCTION, double delta = 0.99);
 
 

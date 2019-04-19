@@ -42,20 +42,20 @@ namespace hplll {
 **************************************************************************************/
 
 template<> int
-FPTuple_f<long, double>::call_fplll(ZZ_mat<double> &b, ZZ_mat<double> &u, double delta, double eta,  \
+FPTuple_f<long, double>::call_fplll(int &n_swaps, ZZ_mat<double> &b, ZZ_mat<double> &u, double delta, double eta,  \
                                     LLLMethod method, FloatType floatType,               \
                                     int precision, int flags) {
 
 	int status;
 
-	status = lll_reduction(b, u, delta, eta, method, floatType, precision);
+	status = lll_reduction(n_swaps, b, u, delta, eta, method, floatType, precision);
 
 	return status;
 }
 
 
 template<> int
-FPTuple_f<long, long double>::call_fplll(ZZ_mat<long double> &b, ZZ_mat<long double> &u, double delta, double eta,  \
+FPTuple_f<long, long double>::call_fplll(int &n_swaps, ZZ_mat<long double> &b, ZZ_mat<long double> &u, double delta, double eta,  \
         LLLMethod method, FloatType floatType,               \
         int precision, int flags) {
 
@@ -67,7 +67,7 @@ FPTuple_f<long, long double>::call_fplll(ZZ_mat<long double> &b, ZZ_mat<long dou
 }
 
 template<> int
-FPTuple_f<__int128_t, double>::call_fplll(ZZ_mat<double> &b, ZZ_mat<double> &u, double delta, double eta,  \
+FPTuple_f<__int128_t, double>::call_fplll(int &n_swaps, ZZ_mat<double> &b, ZZ_mat<double> &u, double delta, double eta,  \
         LLLMethod method, FloatType floatType,               \
         int precision, int flags) {
 
@@ -79,7 +79,7 @@ FPTuple_f<__int128_t, double>::call_fplll(ZZ_mat<double> &b, ZZ_mat<double> &u, 
 }
 
 template<> int
-FPTuple_f<__int128_t, long double>::call_fplll(ZZ_mat<long double> &b, ZZ_mat<long double> &u, double delta, double eta,  \
+FPTuple_f<__int128_t, long double>::call_fplll(int &n_swaps, ZZ_mat<long double> &b, ZZ_mat<long double> &u, double delta, double eta,  \
         LLLMethod method, FloatType floatType,               \
         int precision, int flags) {
 
@@ -326,6 +326,7 @@ FPTuple_f<ZT, FT>::detect_lift_f_z(ZZ_mat<ZT>& U, ZZ_mat<mpz_t> L_in, ZZ_mat<FT>
 
 	int m, d;
 	int i, j;
+	int n_swaps;
 
 	m = L_in.get_rows();
 	d = L_in.get_cols();
@@ -431,7 +432,7 @@ FPTuple_f<ZT, FT>::detect_lift_f_z(ZZ_mat<ZT>& U, ZZ_mat<mpz_t> L_in, ZZ_mat<FT>
 
 			setId(VfT);
 
-			call_fplll(AfT, VfT, delta, 0.51, LM_FAST, FT_DEFAULT, 0);
+			call_fplll(n_swaps, AfT, VfT, delta, 0.51, LM_FAST, FT_DEFAULT, 0);
 
 			transpose(Af, AfT);
 

@@ -2253,11 +2253,19 @@ void lift_truncate(ZZ_mat<long>& C_out, ZZ_mat<mpz_t> A, long def, long bits) {
 
     long bbc = mmax; // Bits before conversion
 
+    cout << "s = " << bits -mmin +2 << endl;
+    cout << "bits = " << bits << endl;
+    cout << "mmin = " << mmin << endl;
+    cout << "mmax = " << mmax << endl;
+
     if ((mmin - 2) > bits) {
 
       long s = bits - mmin + 2;
-
       bbc += s;
+
+//Added by J. Chen on Dec. 21, 2018
+      //if (bbc <= 63){
+
 
       for (i = 0; i < n; i++)
         for (j = 0; j < d; j++)
@@ -2270,11 +2278,10 @@ void lift_truncate(ZZ_mat<long>& C_out, ZZ_mat<mpz_t> A, long def, long bits) {
           t.abs(C(i, j));
           maxloc = max(maxloc, size_in_bits(t));
         }
-
       }
 
       cout << "Remains down " << maxloc << endl;
-
+//}// end added by J. Chen
       if (bbc > 63) {
 
         cout << endl << "** Warning in lift truncate: too many integer digits required for truncation >= 64 ?" << endl;
@@ -2853,6 +2860,17 @@ utimesec ()
 }
 
 // Discover a triangular structure, integer matrix
+/******
+    By JC on Dec. 7, 2018
+    The input matrix B is with n rows and d columns.
+    ------------------------------------------------------------------------------
+    vargrind reports "Conditional jump or move depends on uninitialised value(s)"
+    at: void hplll::matrix_structure<fplll::Z_NR<long> >
+    (std::vector<int, std::allocator<int> >&, hplll::matrix<fplll::Z_NR<long> >,
+    int, int)
+    ------------------------------------------------------------------------------
+
+*/
 template<class T> inline void matrix_structure(vector<int>& structure, matrix<T> B, int n, int d)
 {
   int i, k;
@@ -2864,8 +2882,8 @@ template<class T> inline void matrix_structure(vector<int>& structure, matrix<T>
   for (k = 0; k < d; k++) {
     for (i = n - 1; (i >= 0) && (B(i, k) == 0); i--) { }
     structure[k] = i;
-
   }
+
   // Make it triangular for limiting changes during the computation
   for (k = 1; k < d; k++)   structure[k] = max(structure[k - 1], structure[k]);
 }

@@ -50,7 +50,7 @@ protected:
 
   // Because of restrictions on input types for fplll, should be temporary
 
-  int call_fplll(ZZ_mat<FT> &b, ZZ_mat<FT> &u, double delta = LLL_DEF_DELTA, double eta = LLL_DEF_ETA,          \
+  int call_fplll(int &n_swaps, ZZ_mat<FT> &b, ZZ_mat<FT> &u, double delta = LLL_DEF_DELTA, double eta = LLL_DEF_ETA,          \
                  LLLMethod method = LM_WRAPPER, FloatType floatType = FT_DEFAULT,               \
                  int precision = 0, int flags = LLL_DEFAULT);
 
