@@ -1,0 +1,11 @@
+------------------------------------------------------------------------------
+Complile and link:
+
+	g++ -Wall -O2 -o alg_num_gen alg_num.cc -lm -lgmp -lmps -lpthread
+
+------------------------------------------------------------------------------
+Run:
+	./alg_num_gen 15
+
+NOTE: You can replace 15 by any other positive integer as the degree of the polynomial.
+
